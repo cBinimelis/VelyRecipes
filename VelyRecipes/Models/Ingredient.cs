@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VelyRecipes.Models
+namespace VelyRecipes.Library.Models
 {
-    public class Recipe
+    public class Ingredient
     {
         [Key]
-        public int Id { get; set; }
+        public int IdIngredient { get; set; }
         public string Name { get; set; }
-        public string ShortDescription { get; set; }
-        public int Calories { get; set; }
-        public int CookTime { get; set; }
+        public int Quantity { get; set; }
+        public string? Unit { get; set; }
     }
 }
