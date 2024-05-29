@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VelyRecipes.Library.Models;
 
-namespace VelyRecipes.Models
+namespace VelyRecipes.Models;
+
+public partial class Recipe
 {
-    public class Recipe
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string ShortDescription { get; set; } = string.Empty;
-        public int Calories { get; set; }
-        public int CookTime { get; set; }
+    public int IdRecipe { get; set; }
 
-        public List<Ingredient> Ingredients { get; set; } = new();
-        public List<Step> Steps { get; set; } = new();
-    }
+    public string Name { get; set; } = null!;
+
+    public string Description { get; set; } = null!;
+
+    public int? Calories { get; set; }
+
+    public int? CookTime { get; set; }
+
+    public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
+
+    public virtual ICollection<Step> Steps { get; set; } = new List<Step>();
 }

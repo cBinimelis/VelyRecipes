@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using VelyRecipes.Data;
 using VelyRecipes.Interfaces;
-using VelyRecipes.Library.Models;
 using VelyRecipes.Models;
 
 namespace VelyRecipes.Repositories
@@ -27,7 +23,7 @@ namespace VelyRecipes.Repositories
 
         public async Task<Recipe> DeleteAsync(int id)
         {
-            var recipeModel = await _dbContext.Recipes.FirstOrDefaultAsync(x => x.Id == id);
+            var recipeModel = await _dbContext.Recipes.FirstOrDefaultAsync(x => x.IdRecipe == id);
             if (recipeModel == null)
             {
                 return null;
@@ -39,7 +35,7 @@ namespace VelyRecipes.Repositories
 
         public async Task<List<Recipe>> GetAllAsync()
         {
-            return await _dbContext.Recipes.Include(i => i.Ingredients).ToListAsync();
+            return await _dbContext.Recipes.Include(s=>s.Steps).ToListAsync();
         }
 
         public async Task<Recipe?> GetByIdAsync(int id)

@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using VelyRecipes.API.Mappers;
 using VelyRecipes.Dtos.Recipe;
 using VelyRecipes.Models;
 
@@ -9,22 +6,25 @@ namespace VelyRecipes.Mappers
 {
     public static class RecipeMappers
     {
-        public static RecipeDto ToRecipeDto(this Recipe recipe){
+        public static RecipeDto ToRecipeDto(this Recipe recipe)
+        {
             return new RecipeDto
             {
-                Id = recipe.Id,
+                Id = recipe.IdRecipe,
                 Name = recipe.Name,
-                ShortDescription = recipe.ShortDescription,
+                Description = recipe.Description,
                 Calories = recipe.Calories,
                 CookTime = recipe.CookTime,
+                Steps = recipe.Steps.Select(s => s.ToStepDto()).ToList(),
             };
         }
 
-        public static Recipe ToRecipeFromCreateDTO(this CreateRecipeRequestDto recipeDto){
+        public static Recipe ToRecipeFromCreateDTO(this CreateRecipeRequestDto recipeDto)
+        {
             return new Recipe
             {
                 Name = recipeDto.Name,
-                ShortDescription = recipeDto.ShortDescription,
+                Description = recipeDto.ShortDescription,
                 Calories = recipeDto.Calories,
                 CookTime = recipeDto.CookTime,
             };
